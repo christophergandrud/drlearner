@@ -1,0 +1,19 @@
+Package: drlearner
+Type: Package
+Title: Doubly Robust Machine Learner for Heterogeneous Treatment Effect 
+    Estimation
+Version: 0.1.0
+Authors@R: c(
+    person("Christopher", "Gandrud", email = "christopher.gandrud@gmail.com",
+        role = c("aut", "cre"))
+    )
+Description: Implements Kennedy (2022) Doubly Robust Machine Learner for 
+    Heterogeneous Treatment Effect (HTE) estimation, returning output needed for 
+    best linear projection of the HTE for approximately optimal targeting.
+Imports:
+    glmnet
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+License: LGPL (>= 3)
