@@ -8,3 +8,8 @@ Implements Kennedy (2022) Doubly Robust Machine Learner for
 Heterogeneous Treatment Effect (HTE) estimation, returning output needed for 
 best linear projection of the HTE for approximately optimal targeting.
 
+## Install
+
+```r
+devtools::install_github("christophergandrud/drlearner")
+```

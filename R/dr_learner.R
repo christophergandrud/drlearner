@@ -22,17 +22,20 @@
 #'
 #' @export
 
-df_learner <- function(X, Y, W, family = "gaussian") {
+dr_learner <- function(X, Y, W, family = "gaussian") {
   # Split into 3 samples
   n <- nrow(X)
   stopifnot(
     "X, Y, and W must all be of the same length" =
       n == length(Y) & n == length(W)
   )
-  s <- sample(rep(1:3), floor(n / 3))
+  even_split <- floor(n/3)
+  s <- c(rep(1:3, even_split), 1:(n-even_split*3))
+  s <- sample(s)
 
   # Step 1
   # Propensity scores
+                    #### This could be parallelised ####
   W.hat <- predict(cv.glmnet(X[s == 1, ], W[s == 1], family = "binomial"),
     newx = X, type = "response", s = "lambda.min"
   )
@@ -57,7 +60,7 @@ df_learner <- function(X, Y, W, family = "gaussian") {
   )
 
   out <- list(
-    Y.org = Y, W.org = W, Y.hat = Y.hat, W.hat = W.hat,
+    Y = Y, W = W, Y.hat = Y.hat, W.hat = W.hat,
     tau.hat = tau.hat
   )
   class(out) <- "drlearner_blp"
