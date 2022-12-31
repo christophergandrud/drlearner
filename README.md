@@ -33,8 +33,9 @@ the individuals’ characteristics (CATE). However, we don’t fully observe
 the characteristics of each individual. How might we make optimal
 treatment decisions based on the characteristics we do observe?
 
-This package is one step in the following proposed process for to make
-approximately optimal targeting decisions:
+This package enables one way (Doubly Robust Learner) to do the first
+step in the following process for making approximately optimal treatment
+targeting decisions:
 
 1.  Estimate CATE, e.g. using `dr_learner` from this package or
     `causal_forest` from the [grf
