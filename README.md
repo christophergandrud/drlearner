@@ -77,13 +77,13 @@ the data mentioned in the set up.
 
 - Construct estimates of $\hat{\pi}$ of the propensity scores $\pi$
   using $D^n_1$.
-- Construct estimates ($\hat{\mu}_0,\hat{\mu}_1$) of the regression
+- Construct estimates ($\hat{\mu}_{0},\hat{\mu}_{1}$) of the regression
   functions ($\mu_0,\mu_1$) using $D^n_1$.
 
 *Step 2. Pseudo-outcome regression:*
 
 $$
-\widehat{\varphi}(Z)=\frac{W-\widehat{\pi}(X)}{\widehat{\pi}(X)\{1-\widehat{\pi}(X)\}}\left\{Y-\widehat{\mu}_A(X)\right\}+\widehat{\mu}_1(X)-\widehat{\mu}_0(X)
+\widehat{\varphi}(Z)=\frac{W-\widehat{\pi}(X)}{\widehat{\pi}(X)\{1-\widehat{\pi}(X)\}}\\{\{Y-\widehat{\mu}_A(X)\\}\}+\widehat{\mu}_1(X)-\widehat{\mu}_0(X)
 $$
 
 and regress it on covariates $X$ in the test sample $D^n_2$, giving us
@@ -92,7 +92,7 @@ $$
 \widehat{\tau}_{d r}(x)=\widehat{\mathbb{E}}_n\{\widehat{\varphi}(Z) \mid X=x\}
 $$
 
-\*Step 3. Estimate outcome given covariates
+*Step 3. Estimate outcome given covariates*
 
 Not included in Kennedy (2022), but needed for the best linear
 projection: estimate the outcome given the covariates $X$ using sample
