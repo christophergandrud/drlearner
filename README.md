@@ -47,7 +47,7 @@ approximately optimal targeting decisions:
 
 ### Formal setup
 
-Imagine data $Z = (X,A,Y)$
+Imagine data $Z = (X,W,Y)$
 
 $$
 \begin{aligned}

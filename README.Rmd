@@ -52,7 +52,7 @@ individuals we do observe. You can do this using the [blpopt package](https://gi
 
 ### Formal setup
 
-Imagine data $Z = (X,A,Y)$
+Imagine data $Z = (X,W,Y)$
 
 $$
 \begin{aligned}
