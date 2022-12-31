@@ -62,7 +62,7 @@ $$
 \end{aligned}
 $$
 
-The aim of conditional average treatment effect estimation is to estimate the difference of the regression functions under treatment ($W = 1$) versus control ($W = 0$)
+The aim of conditional average treatment effect estimation is to estimate the difference of the regression functions under treatment $(W = 1)$ versus control $(W = 0)$
 
 $$
 \tau(x) \equiv \mu_1(x)-\mu_0(x).
@@ -76,8 +76,8 @@ Let $(D^n_1,D^n_2$) be two independent samples of $n$ observations of the data m
 
 *Step 1. Nuisance training*
 
-- Construct estimates of $\hat{\pi}$ of the propensity scores $\pi$ using $D^n_1$.
-- Construct estimates $(\hat{\mu}_{0},\hat{\mu}_{1})$ of the regression functions $(\mu_0,\mu_1)$ using $D^n_1$.
+- Construct estimates of $\widehat{\pi}$ of the propensity scores $\pi$ using $D^n_1$.
+- Construct estimates $(\widehat{\mu}_{0},\widehat{\mu}_{1})$ of the regression functions $(\mu_0,\mu_1)$ using $D^n_1$.
 
 *Step 2. Pseudo-outcome regression:*
 
@@ -88,7 +88,7 @@ $$
 and regress it on covariates $X$ in the test sample $D^n_2$, giving us
 
 $$
-\widehat{\tau}_{d r}(x)=\widehat{\mathbb{E}}_n\{\widehat{\varphi}(Z) \mid X=x\}
+\widehat{\tau}_{d r}(x)=\widehat{\mathbb{E}}_n\\{\widehat{\varphi}(Z) \mid X=x\\}
 $$
 
 *Step 3. Estimate outcome given covariates*
@@ -99,7 +99,7 @@ estimate the outcome given the covariates $X$ using sample $D^n_2$.
 *Step 4. Best linear projection of the CATE*
 
 Using the output of the DR Learner procedure above, now find the best
-linear projection of the CATE given observed covariates $A$ where $A \subset X$.
+linear projection of the CATE given observed covariates $A$ where $A \subseteq X$.
 
 ## Example
 

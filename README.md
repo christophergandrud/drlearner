@@ -59,7 +59,7 @@ $$
 
 The aim of conditional average treatment effect estimation is to
 estimate the difference of the regression functions under treatment
-($W = 1$) versus control ($W = 0$)
+$(W = 1)$ versus control $(W = 0)$
 
 $$
 \tau(x) \equiv \mu_1(x)-\mu_0(x).
@@ -76,10 +76,10 @@ the data mentioned in the set up.
 
 *Step 1. Nuisance training*
 
-- Construct estimates of $\hat{\pi}$ of the propensity scores $\pi$
+- Construct estimates of $\widehat{\pi}$ of the propensity scores $\pi$
   using $D^n_1$.
-- Construct estimates $(\hat{\mu}_{0},\hat{\mu}_{1})$ of the regression
-  functions $(\mu_0,\mu_1)$ using $D^n_1$.
+- Construct estimates $(\widehat{\mu}_{0},\widehat{\mu}_{1})$ of the
+  regression functions $(\mu_0,\mu_1)$ using $D^n_1$.
 
 *Step 2. Pseudo-outcome regression:*
 
@@ -90,7 +90,7 @@ $$
 and regress it on covariates $X$ in the test sample $D^n_2$, giving us
 
 $$
-\widehat{\tau}_{d r}(x)=\widehat{\mathbb{E}}_n\{\widehat{\varphi}(Z) \mid X=x\}
+\widehat{\tau}_{d r}(x)=\widehat{\mathbb{E}}_n\\{\widehat{\varphi}(Z) \mid X=x\\}
 $$
 
 *Step 3. Estimate outcome given covariates*
@@ -103,7 +103,7 @@ $D^n_2$.
 
 Using the output of the DR Learner procedure above, now find the best
 linear projection of the CATE given observed covariates $A$ where
-$A \subset X$.
+$A \subseteq X$.
 
 ## Example
 
