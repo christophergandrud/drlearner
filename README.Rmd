@@ -124,7 +124,7 @@ tau_ex <- function(x) {
 }
 TAU <- tau_ex(X[, 3])
 
-# Propensity  and Outcome vary along 2 and 5 dimensions only.
+# Propensity and Outcome vary along only 2 dimensions
 W <- rbinom(n, 1, 1 / (1 + exp(-X[, 1] - X[, 2])))
 Y <- pmax(X[, 2] + X[, 3], 0) + rowMeans(X[, 4:6]) / 2 + W * TAU + rnorm(n)
 
