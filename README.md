@@ -21,8 +21,8 @@ You can install the development version of blpopt from
 [GitHub](https://github.com/) with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("christophergandrud/blpopt")
+# install.packages("remotes")
+remotes::install_github("christophergandrud/blpopt")
 ```
 
 ## About
@@ -63,7 +63,9 @@ $(W = 1)$ versus control $(W = 0)$
 
 $$
 \tau(x) \equiv \mu_1(x)-\mu_0(x).
-$$ From $\tau(x)$ we would like to then identify optimal treatments for
+$$
+
+From $\tau(x)$ we would like to then identify optimal treatments for
 each individual, even when we only observe a subset of covariates $A$
 where $A \subseteq X$.
 
@@ -110,6 +112,9 @@ $A \subseteq X$.
 ## Example
 
 ``` r
+# remotes::install_github("christophergandrud/blpopt")
+# remotes::install_github("christophergandrud/drlearner")
+
 xfun::pkg_attach2("blpopt", "drlearner", "tidyr", "ggplot2")
 #> 
 #> Attaching package: 'blpopt'
