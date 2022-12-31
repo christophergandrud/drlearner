@@ -11,8 +11,9 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 <!-- badges: end -->
 
 Doubly robust machine learner (DR Learner) for Heterogeneous Treatment
-Effect Estimation to enable approximately optimal policy targeting using
-best linear projections.
+Effect Estimation from [Kennedy
+(2022)](https://arxiv.org/pdf/2004.14497.pdf) to enable approximately
+optimal policy targeting using best linear projections.
 
 ## Installation
 
@@ -77,8 +78,8 @@ the data mentioned in the set up.
 
 - Construct estimates of $\hat{\pi}$ of the propensity scores $\pi$
   using $D^n_1$.
-- Construct estimates ($\hat{\mu}_{0},\hat{\mu}_{1}$) of the regression
-  functions ($\mu_0,\mu_1$) using $D^n_1$.
+- Construct estimates $(\hat{\mu}_{0},\hat{\mu}_{1})$ of the regression
+  functions $(\mu_0,\mu_1)$ using $D^n_1$.
 
 *Step 2. Pseudo-outcome regression:*
 
