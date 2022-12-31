@@ -5,7 +5,7 @@
 \title{Estimate heterogeneous treatment effect using Doubly Robust Estimation
 (Kennedy 2022)}
 \usage{
-dr_learner(X, Y, W, family = "gaussian")
+dr_learner(X, Y, W, family = "gaussian", ...)
 }
 \arguments{
 \item{X}{matrix of covariates}
@@ -15,6 +15,8 @@ dr_learner(X, Y, W, family = "gaussian")
 \item{W}{logical vector of treatment states (0, 1)}
 
 \item{family}{character in ("gaussian", "binomial") to pass to \code{cv.glmnet}}
+
+\item{...}{arguments to pass to \code{cv.glmnet}}
 }
 \value{
 A list of estimates needed for best linear projections of the
@@ -27,6 +29,23 @@ and the localized predictions of the causal forest E[Y_1 - Y_0 | X = x]
 \description{
 Estimate heterogeneous treatment effect using Doubly Robust Estimation
 (Kennedy 2022)
+}
+\examples{
+# Simulate data
+n <- 2000
+p <- 20
+X <- matrix(rnorm(n * p), n, p)
+# CATE varies along one dim only.
+tau_ex <- function(x) {
+    1 / (1 + exp(-x))
+}
+TAU <- tau_ex(X[, 3])
+# Propensity  and Outcome vary along 2 and 5 dimensions only.
+W <- rbinom(n, 1, 1 / (1 + exp(-X[, 1] - X[, 2])))
+Y <- pmax(X[, 2] + X[, 3], 0) + rowMeans(X[, 4:6]) / 2 + W * TAU + rnorm(n)
+
+drl <- dr_learner(X, Y, W)
+
 }
 \references{
 Kennedy, Edward H. (2022) "Towards optimal doubly robust
