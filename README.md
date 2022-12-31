@@ -63,7 +63,9 @@ $(W = 1)$ versus control $(W = 0)$
 
 $$
 \tau(x) \equiv \mu_1(x)-\mu_0(x).
-$$
+$$ From $\tau(x)$ we would like to then identify optimal treatments for
+each individual, even when we only observe a subset of covariates $A$
+where $A \subseteq X$.
 
 ### Doubly Robust Learner (DR Learner)
 
@@ -78,7 +80,7 @@ the data mentioned in the set up.
 
 - Construct estimates of $\widehat{\pi}$ of the propensity scores $\pi$
   using $D^n_1$.
-- Construct estimates $(\widehat{\mu}_{0},\widehat{\mu}_{1})$ of the
+- Construct estimates $(\widehat{\mu_{0}},\widehat{\mu_{1}})$ of the
   regression functions $(\mu_0,\mu_1)$ using $D^n_1$.
 
 *Step 2. Pseudo-outcome regression:*
