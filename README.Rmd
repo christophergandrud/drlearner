@@ -1,23 +1,32 @@
+---
+output: github_document
+---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
 
 # blpopt
 
 <!-- badges: start -->
-
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 [![R-CMD-check](https://github.com/christophergandrud/dflearner/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/christophergandrud/dflearner/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-Doubly robust machine learner (DR Learner) for Heterogeneous Treatment
-Effect Estimation to enable approximately optimal policy targeting using
-best linear projections.
+Doubly robust machine learner (DR Learner) for Heterogeneous Treatment Effect 
+Estimation to enable approximately optimal policy targeting using best linear 
+projections.
 
 ## Installation
 
-You can install the development version of blpopt from
-[GitHub](https://github.com/) with:
+You can install the development version of blpopt from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("devtools")
@@ -26,23 +35,20 @@ devtools::install_github("christophergandrud/blpopt")
 
 ## About
 
-Imagine we want to target individuals in a population with a treatment.
-The effect of the treatment is heterogeneous, i.e. it is conditional on
-the individuals’ characteristics (CATE). However, we don’t fully observe
-the characteristics of each individual. How might we make optimal
-treatment decisions based on the characteristics we do observe?
+Imagine we want to target individuals in a population with a treatment. The 
+effect of the treatment is heterogeneous, i.e. it is conditional on the 
+individuals' characteristics (CATE). However, we don't fully observe the characteristics
+of each individual. How might we make optimal treatment decisions based 
+on the characteristics we do observe?
 
-This package is one step in the following proposed process for to make
+This package is one step in the following proposed process for to make 
 approximately optimal targeting decisions:
 
-1.  Estimate CATE, e.g. using `dr_learner` from this package or
-    `causal_forest` from the [grf
-    package](https://grf-labs.github.io/grf/).
+1. Estimate CATE, e.g. using `dr_learner` from 
+this package or `causal_forest` from the [grf package](https://grf-labs.github.io/grf/).
 
-2.  Find the best linear projection of the CATE given the
-    characteristics of the individuals we do observe. You can do this
-    using the [blpopt
-    package](https://github.com/christophergandrud/blpopt).
+2. Find the best linear projection of the CATE given the characteristics of the 
+individuals we do observe. You can do this using the [blpopt package](https://github.com/christophergandrud/blpopt).
 
 ### Formal setup
 
@@ -56,9 +62,7 @@ $$
 \end{aligned}
 $$
 
-The aim of conditional average treatment effect estimation is to
-estimate the difference of the regression functions under treatment
-($W = 1$) versus control ($W = 0$)
+The aim of conditional average treatment effect estimation is to estimate the difference of the regression functions under treatment ($W = 1$) versus control ($W = 0$)
 
 $$
 \tau(x) \equiv \mu_1(x)-\mu_0(x).
@@ -66,19 +70,14 @@ $$
 
 ### Doubly Robust Learner (DR Learner)
 
-[Kennedy (2022, 10)](https://arxiv.org/pdf/2004.14497.pdf) proposes
-using sample slitting estimate the conditional average treatment effects
-using the following algorithm:
+[Kennedy (2022, 10)](https://arxiv.org/pdf/2004.14497.pdf) proposes using sample slitting estimate the conditional average treatment effects using the following algorithm:
 
-Let $(D^n_1,D^n_2$) be two independent samples of $n$ observations of
-the data mentioned in the set up.
+Let $(D^n_1,D^n_2$) be two independent samples of $n$ observations of the data mentioned in the set up.
 
 *Step 1. Nuisance training*
 
-- Construct estimates of $\hat{\pi}$ of the propensity scores $\pi$
-  using $D^n_1$.
-- Construct estimates ($\hat{\mu}_0,\hat{\mu}_1$) of the regression
-  functions ($\mu_0,\mu_1$) using $D^n_1$.
+- Construct estimates of $\hat{\pi}$ of the propensity scores $\pi$ using $D^n_1$.
+- Construct estimates ($\hat{\mu}_0,\hat{\mu}_1$) of the regression functions ($\mu_0,\mu_1$) using $D^n_1$.
 
 *Step 2. Pseudo-outcome regression:*
 
@@ -92,30 +91,20 @@ $$
 \widehat{\tau}_{d r}(x)=\widehat{\mathbb{E}}_n\{\widehat{\varphi}(Z) \mid X=x\}
 $$
 
-\*Step 3. Estimate outcome given covariates
+*Step 3. Estimate outcome given covariates
 
-Not included in Kennedy (2022), but needed for the best linear
-projection: estimate the outcome given the covariates $X$ using sample
-$D^n_2$.
+Not included in Kennedy (2022), but needed for the best linear projection: 
+estimate the outcome given the covariates $X$ using sample $D^n_2$.
 
 *Step 4. Best linear projection of the CATE*
 
 Using the output of the DR Learner procedure above, now find the best
-linear projection of the CATE given observed covariates $A$ where
-$A \subset X$.
+linear projection of the CATE given observed covariates $A$ where $A \subset X$.
 
 ## Example
 
-``` r
+```{r}
 xfun::pkg_attach2("blpopt", "drlearner", "tidyr", "ggplot2")
-#> 
-#> Attaching package: 'blpopt'
-#> The following object is masked from 'package:stats':
-#> 
-#>     predict
-#> The following object is masked from 'package:base':
-#> 
-#>     summary
 theme_set(theme_minimal())
 
 # Simulate data
@@ -146,5 +135,3 @@ ggplot(blp_drl_pred, aes(A, blp_drl)) +
     ggtitle("[1 Simulation] Compare predicted treatment effects from\nCATE-BLP and plugin linear regression ",
     subtitle = "Black dashed line represents the true effect.\nGreen dots are CATE-BLP from DR Learner")
 ```
-
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
