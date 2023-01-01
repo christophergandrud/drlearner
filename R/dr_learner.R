@@ -1,5 +1,5 @@
 #' Estimate heterogeneous treatment effect using Doubly Robust Estimation
-#' (Kennedy 2022)
+#' (Kennedy 2022) using `cv.glmnet` for estimate construction
 #'
 #' @param X matrix of covariates
 #' @param Y numeric vector of outcomes
@@ -53,7 +53,7 @@ dr_learner <- function(X, Y, W, family = "gaussian", ...) {
   # Step 1
   # Propensity scores
   #### This could be parallelised ####
-  W.hat <- predict(cv.glmnet(X[s == 1, ], W[s == 1], family = "binomial", ...),
+  pi.hat <- predict(cv.glmnet(X[s == 1, ], W[s == 1], family = "binomial", ...),
     newx = X, type = "response", s = "lambda.min"
   )
 
@@ -67,7 +67,7 @@ dr_learner <- function(X, Y, W, family = "gaussian", ...) {
 
   # Step 2
   # Psuedo-regression
-  pseudo <- ((W - W.hat) / (W.hat * (1 - W.hat))) * (Y - W * mu1.hat - (1 - W) * mu0.hat) + mu1.hat - mu0.hat
+  pseudo <- ((W - pi.hat) / (pi.hat * (1 - pi.hat))) * (Y - W * mu1.hat - (1 - W) * mu0.hat) + mu1.hat - mu0.hat
   tau.hat <- predict(cv.glmnet(X[s == 3, ], pseudo[s == 3], family = family, ...
   ), newx = X, s = "lambda.min"
   )
@@ -78,7 +78,7 @@ dr_learner <- function(X, Y, W, family = "gaussian", ...) {
   )
 
   out <- list(
-    Y = Y, W = W, Y.hat = Y.hat, W.hat = W.hat, tau.hat = tau.hat
+    Y = Y, W = W, Y.hat = Y.hat, W.hat = pi.hat, tau.hat = tau.hat
   )
   class(out) <- "drlearner_blp"
   return(out)

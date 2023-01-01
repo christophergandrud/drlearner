@@ -13,7 +13,10 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 Doubly robust machine learner (DR Learner) for Heterogeneous Treatment
 Effect Estimation from [Kennedy
 (2022)](https://arxiv.org/pdf/2004.14497.pdf) to enable approximately
-optimal policy targeting using best linear projections.
+optimal policy targeting using best linear projections. This
+implementation uses
+[`cv.glmnet`](https://glmnet.stanford.edu/reference/cv.glmnet.html) for
+estimate construction.
 
 ## Installation
 
