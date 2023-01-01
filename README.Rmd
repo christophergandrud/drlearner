@@ -57,7 +57,7 @@ Imagine data $Z = (X,W,Y)$
 $$
 \begin{aligned}
 \pi(x) & =\mathbb{P}(W=1 \mid X=x) \\
-\mu_a(x) & =\mathbb{E}(Y \mid X=x, W=a) \\
+\mu_a(x) & =\mathbb{E}(Y \mid X=x, W=w) \\
 \eta(x) & =\mathbb{E}(Y \mid X=x)
 \end{aligned}
 $$

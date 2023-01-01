@@ -53,29 +53,28 @@ dr_learner <- function(X, Y, W, family = "gaussian", ...) {
   # Step 1
   # Propensity scores
   #### This could be parallelised ####
-  W.hat <- predict(cv.glmnet(X[s == 1, ], W[s == 1], family = "binomial"),
-    newx = X, type = "response", s = "lambda.min", ...
+  W.hat <- predict(cv.glmnet(X[s == 1, ], W[s == 1], family = "binomial", ...),
+    newx = X, type = "response", s = "lambda.min"
   )
 
   # Y given covariates and treatment assignment
   mu0.hat <- predict(cv.glmnet(X[W == 0 & s == 2, ], Y[W == 0 & s == 2],
-    family = family
-  ), newx = X, s = "lambda.min", ...)
+    family = family, ...
+  ), newx = X, s = "lambda.min")
   mu1.hat <- predict(cv.glmnet(X[W == 1 & s == 2, ], Y[W == 1 & s == 2],
-    family = family
-  ), newx = X, s = "lambda.min", ...)
+    family = family, ...
+  ), newx = X, s = "lambda.min")
 
   # Step 2
   # Psuedo-regression
   pseudo <- ((W - W.hat) / (W.hat * (1 - W.hat))) * (Y - W * mu1.hat - (1 - W) * mu0.hat) + mu1.hat - mu0.hat
-  tau.hat <- predict(cv.glmnet(X[s == 3, ], pseudo[s == 3]),
-                     newx = X, s = "lambda.min", ...
+  tau.hat <- predict(cv.glmnet(X[s == 3, ], pseudo[s == 3], family = family, ...
+  ), newx = X, s = "lambda.min"
   )
 
-  # Predict Y give X. Needed for for best linear projection
-  Y.hat <- predict(cv.glmnet(X[s == 3, ], Y[s == 3]),
-    family = family,
-    newx = X, s = "lambda.min", ...
+  # Predict Y give X. Needed for best linear projection
+  Y.hat <- predict(cv.glmnet(X[s == 3, ], Y[s == 3], family = family, ...),
+    newx = X, s = "lambda.min"
   )
 
   out <- list(
