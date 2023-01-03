@@ -3,7 +3,8 @@
 #'
 #' @param X matrix of covariates
 #' @param Y numeric vector of outcomes
-#' @param W logical vector of treatment states (0, 1)
+#' @param W numeric vector of treatment states [0, 1]. If a logical vector is
+#' supplied, will coerce to numeric with `FALSE = 0` and `TRUE = 1`.
 #' @param family character in ("gaussian", "binomial") to pass to `cv.glmnet`
 #' @param ... arguments to pass to `cv.glmnet`
 #'
@@ -25,7 +26,7 @@
 #' X <- matrix(rnorm(n * p), n, p)
 #' # CATE varies along one dim only.
 #' tau_ex <- function(x) {
-#'     1 / (1 + exp(-x))
+#'   1 / (1 + exp(-x))
 #' }
 #' TAU <- tau_ex(X[, 3])
 #' # Propensity  and Outcome vary along 2 and 5 dimensions only.
@@ -40,6 +41,14 @@
 #' @export
 
 dr_learner <- function(X, Y, W, family = "gaussian", ...) {
+  # Attempting smart coercion
+  if (is.logical(W)) {
+    W <- ifelse(W == TRUE, 1, 0)
+  }
+  if (!is.matrix(X)) {
+    X <- as.matrix(X)
+  }
+
   # Split into 3 samples
   n <- nrow(X)
   stopifnot(
@@ -68,9 +77,7 @@ dr_learner <- function(X, Y, W, family = "gaussian", ...) {
   # Step 2
   # Psuedo-regression
   pseudo <- ((W - pi.hat) / (pi.hat * (1 - pi.hat))) * (Y - W * mu1.hat - (1 - W) * mu0.hat) + mu1.hat - mu0.hat
-  tau.hat <- predict(cv.glmnet(X[s == 3, ], pseudo[s == 3], family = family, ...
-  ), newx = X, s = "lambda.min"
-  )
+  tau.hat <- predict(cv.glmnet(X[s == 3, ], pseudo[s == 3], family = family, ...), newx = X, s = "lambda.min")
 
   # Predict Y give X. Needed for best linear projection
   Y.hat <- predict(cv.glmnet(X[s == 3, ], Y[s == 3], family = family, ...),

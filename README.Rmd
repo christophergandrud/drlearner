@@ -27,10 +27,17 @@ approximately optimal policy targeting using best linear projections. This imple
 
 ## Installation
 
-You can install the development version of blpopt from [GitHub](https://github.com/) with:
+You can install the development version of drlearner from [GitHub](https://github.com/) with:
 
 ``` r
 # install.packages("remotes")
+remotes::install_github("christophergandrud/drlearner")
+```
+
+Because drlearner is intended to work with blpopt for best linear projection estimation,
+also install:
+
+```r
 remotes::install_github("christophergandrud/blpopt")
 ```
 
@@ -135,9 +142,11 @@ blp_drl <- cate_blp(drl, X[, 3])
 blp_drl_pred <- tibble(blp_drl = predict(blp_drl)$predicted, A = X[, 3])
 
 ggplot(blp_drl_pred, aes(A, blp_drl)) +
-    geom_function(fun = tau_ex, col = "black", linetype = "dashed") +
-    geom_point(color = "green") +
-    ylab("Predicted Treatment Effect\n") + xlab("\nObserved Covariate Values") +
-    ggtitle("[1 Simulation] Compare predicted treatment effects from\nCATE-BLP and plugin linear regression ",
-    subtitle = "Black dashed line represents the true effect.\nGreen dots are CATE-BLP from DR Learner")
+  geom_function(fun = tau_ex, col = "black", linetype = "dashed") +
+  geom_line(color = "green") +
+  ylab("Predicted Treatment Effect\n") +
+  xlab("\nObserved Covariate Values") +
+  ggtitle("[1 Simulation] Compare predicted treatment effects from\nCATE-BLP and plugin linear regression ",
+    subtitle = "Black dashed line represents the true effect.\nGreen line is CATE-BLP from DR Learner"
+  )
 ```

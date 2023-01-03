@@ -12,7 +12,8 @@ dr_learner(X, Y, W, family = "gaussian", ...)
 
 \item{Y}{numeric vector of outcomes}
 
-\item{W}{logical vector of treatment states (0, 1)}
+\item{W}{numeric vector of treatment states \link{0, 1}. If a logical vector is
+supplied, will coerce to numeric with \code{FALSE = 0} and \code{TRUE = 1}.}
 
 \item{family}{character in ("gaussian", "binomial") to pass to \code{cv.glmnet}}
 
@@ -37,7 +38,7 @@ p <- 20
 X <- matrix(rnorm(n * p), n, p)
 # CATE varies along one dim only.
 tau_ex <- function(x) {
-    1 / (1 + exp(-x))
+  1 / (1 + exp(-x))
 }
 TAU <- tau_ex(X[, 3])
 # Propensity  and Outcome vary along 2 and 5 dimensions only.
