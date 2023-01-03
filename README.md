@@ -94,10 +94,10 @@ where $A \subseteq X$.
 ### Doubly Robust Learner (DR Learner)
 
 [Kennedy (2022, 10)](https://arxiv.org/pdf/2004.14497.pdf) proposes
-using sample slitting estimate the conditional average treatment effects
-using the following algorithm:
+using sample slitting to estimate the conditional average treatment
+effects using the following algorithm:
 
-Let $(D^n_1,D^n_2$) be two independent samples of $n$ observations of
+Let $(D^n_1,D^n_2)$ be two independent samples of $n$ observations of
 the data mentioned in the set up.
 
 *Step 1. Nuisance training*

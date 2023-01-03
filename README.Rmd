@@ -84,9 +84,9 @@ From $\tau(x)$ we would like to then identify optimal treatments for each indivi
 
 ### Doubly Robust Learner (DR Learner)
 
-[Kennedy (2022, 10)](https://arxiv.org/pdf/2004.14497.pdf) proposes using sample slitting estimate the conditional average treatment effects using the following algorithm:
+[Kennedy (2022, 10)](https://arxiv.org/pdf/2004.14497.pdf) proposes using sample slitting to estimate the conditional average treatment effects using the following algorithm:
 
-Let $(D^n_1,D^n_2$) be two independent samples of $n$ observations of the data mentioned in the set up.
+Let $(D^n_1,D^n_2)$ be two independent samples of $n$ observations of the data mentioned in the set up.
 
 *Step 1. Nuisance training*
 
