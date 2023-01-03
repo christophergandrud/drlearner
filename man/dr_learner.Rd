@@ -53,3 +53,6 @@ Kennedy, Edward H. (2022) "Towards optimal doubly robust
 estimation of heterogeneous causal effects".
 \url{https://arxiv.org/abs/2004.14497}.
 }
+\seealso{
+cv.glmnet
+}

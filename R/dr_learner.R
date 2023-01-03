@@ -19,7 +19,7 @@
 #' estimation of heterogeneous causal effects".
 #' <https://arxiv.org/abs/2004.14497>.
 #'
-#' @seealso
+#' @seealso cv.glmnet
 #'
 #' @examples
 #' # Simulate data
