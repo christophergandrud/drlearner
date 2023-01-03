@@ -56,6 +56,17 @@ targeting decisions:
     using the [blpopt
     package](https://github.com/christophergandrud/blpopt).
 
+#### Why DR Learner and not Causal Forests?
+
+Causal forests are a popular method for estimating CATEs. However, it
+can be memory intensive and even intractable using common hardware on
+large data sets (e.g. millions of observations). In [various simulation
+scenarios](https://github.com/christophergandrud/blpopt/blob/main/notebooks/compare-cate-blp-with-naive-lm.ipynb)
+DR Learner produces equivalent or better results (lower mean squared
+error) much faster; orders of magnitude faster and for large data sets
+(millions of observations) is computationally feasible on a laptop,
+while causal forest runs out of memory.
+
 ### Formal setup
 
 Imagine data $Z = (X,W,Y)$
