@@ -3,7 +3,7 @@
 #'
 #' @param X matrix of covariates
 #' @param Y numeric vector of outcomes
-#' @param W numeric vector of treatment states [0, 1]. If a logical vector is
+#' @param W numeric vector of treatment states \[0, 1\]. If a logical vector is
 #' supplied, will coerce to numeric with `FALSE = 0` and `TRUE = 1`.
 #' @param family character in ("gaussian", "binomial") to pass to `cv.glmnet`
 #' @param ... arguments to pass to `cv.glmnet`
@@ -18,6 +18,8 @@
 #' @references Kennedy, Edward H. (2022) "Towards optimal doubly robust
 #' estimation of heterogeneous causal effects".
 #' <https://arxiv.org/abs/2004.14497>.
+#'
+#' @seealso
 #'
 #' @examples
 #' # Simulate data

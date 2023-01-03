@@ -12,7 +12,7 @@ dr_learner(X, Y, W, family = "gaussian", ...)
 
 \item{Y}{numeric vector of outcomes}
 
-\item{W}{numeric vector of treatment states \link{0, 1}. If a logical vector is
+\item{W}{numeric vector of treatment states [0, 1]. If a logical vector is
 supplied, will coerce to numeric with \code{FALSE = 0} and \code{TRUE = 1}.}
 
 \item{family}{character in ("gaussian", "binomial") to pass to \code{cv.glmnet}}
