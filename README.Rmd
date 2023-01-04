@@ -113,7 +113,7 @@ estimate the outcome given the covariates $X$ using sample $D^n_2$.
 *Step 4. Best linear projection of the CATE*
 
 Using the output of the DR Learner procedure above, now find the best
-linear projection of the CATE given observed covariates $A$ for unit $i$ $\hat{\tau}_{BLP} (A_{i})$, where $A \subseteq X$.
+linear projection of the CATE given observed covariates $A$ for unit $i$ $\widehat{{\tau}_{BLP}} (A_{i})$, where $A \subseteq X$.
 
 *Step 5 (optional): Expected benefit of targeting*
 
@@ -170,9 +170,7 @@ ggplot(blp_drl_pred, aes(A, blp_drl)) +
   ggtitle("[1 Simulation] Compare predicted treatment effects from\nCATE-BLP and plugin linear regression ",
     subtitle = "Black dashed line represents the true effect.\nGreen line is CATE-BLP from DR Learner"
   )
-```
 
-```{r}
 # Find total predicted effect using an approximately optimal vs. "treat all" 
 # targeting. Uncertainty estimated with bootstrap
 total_pred <- cate_blp_bootstrap(blp_drl, iterations = 1000)

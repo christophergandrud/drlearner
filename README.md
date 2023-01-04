@@ -129,7 +129,7 @@ $D^n_2$.
 
 Using the output of the DR Learner procedure above, now find the best
 linear projection of the CATE given observed covariates $A$ for unit $i$
-$\hat{\tau}_{BLP} (A_{i})$, where $A \subseteq X$.
+$\widehat{{\tau}_{BLP}} (A_{i})$, where $A \subseteq X$.
 
 *Step 5 (optional): Expected benefit of targeting*
 
@@ -201,6 +201,7 @@ ggplot(blp_drl_pred, aes(A, blp_drl)) +
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
 
 ``` r
+
 # Find total predicted effect using an approximately optimal vs. "treat all" 
 # targeting. Uncertainty estimated with bootstrap
 total_pred <- cate_blp_bootstrap(blp_drl, iterations = 1000)
@@ -214,4 +215,4 @@ ggplot(total_pred, aes(difference_blp)) +
     ggtitle("Bootstraped Predicted Incremental Profit of using\nApproximately Optimal vs 'Treat All' targeting\nfor a population with characteristics A")
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-2-2.png" width="100%" />
