@@ -113,7 +113,7 @@ estimate the outcome given the covariates $X$ using sample $D^n_2$.
 *Step 4. Best linear projection of the CATE*
 
 Using the output of the DR Learner procedure above, now find the best
-linear projection of the CATE given observed covariates $A$ for unit $i$ $\widehat{{\tau}_{BLP}} (A_{i})$, where $A \subseteq X$.
+linear projection of the CATE given observed covariates $A$ for unit $i$ $(\widehat{\tau_{BLP}} (A_{i}))$, where $A \subseteq X$.
 
 *Step 5 (optional): Expected benefit of targeting*
 
