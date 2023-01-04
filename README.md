@@ -180,3 +180,19 @@ ggplot(blp_drl_pred, aes(A, blp_drl)) +
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
+
+``` r
+# Find total predicted effect using an approximately optimal vs. "treat all" 
+# targeting. Uncertainty estimated with bootstrap
+total_pred <- cate_blp_bootstrap(blp_drl, iterations = 1000)
+#> [ 100 / 1000 ][ 200 / 1000 ][ 300 / 1000 ][ 400 / 1000 ][ 500 / 1000 ][ 600 / 1000 ][ 700 / 1000 ][ 800 / 1000 ][ 900 / 1000 ][ 1000 / 1000 ]
+
+total_pred$difference_blp <- total_pred$predicted_blp_optimal_totals - total_pred$predicted_totals
+
+ggplot(total_pred, aes(difference_blp)) +
+    geom_density(alpha = 0.7) +
+    xlab("\nPredicted Incremental Profit") +
+    ggtitle("Bootstraped Predicted Incremental Profit of using\nApproximately Optimal vs 'Treat All' targeting\nfor a population with characteristics A")
+```
+
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
