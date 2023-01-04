@@ -136,7 +136,7 @@ $(\widehat{\tau_{BLP}} (A_{i}))$, where $A \subseteq X$.
 It is often non-trivial to apply a treatment targeting regime, even if
 we have good estimates of the CATE. We can estimate the expected benefit
 of approximately optimal targeting by comparing the the CATE-BLP if we
-apply the treatment to the whole population ($Pr(W) = 1$) compared to a
+apply the treatment to the whole population $(Pr(W) = 1)$ compared to a
 world where we only apply a treatment if the BLP is greater than some
 value $\gamma$:
 
@@ -204,7 +204,8 @@ ggplot(blp_drl_pred, aes(A, blp_drl)) +
 
 # Find total predicted effect using an approximately optimal vs. "treat all" 
 # targeting. Uncertainty estimated with bootstrap
-total_pred <- cate_blp_bootstrap(blp_drl, iterations = 1000)
+total_pred <- cate_blp_bootstrap(blp_drl, iterations = 1000, 
+                                 tau.treatment.baseline = 0)
 #> [ 100 / 1000 ][ 200 / 1000 ][ 300 / 1000 ][ 400 / 1000 ][ 500 / 1000 ][ 600 / 1000 ][ 700 / 1000 ][ 800 / 1000 ][ 900 / 1000 ][ 1000 / 1000 ]
 
 total_pred$difference_blp <- total_pred$predicted_optimal - total_pred$predicted_totals
