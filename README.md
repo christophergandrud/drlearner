@@ -128,8 +128,27 @@ $D^n_2$.
 *Step 4. Best linear projection of the CATE*
 
 Using the output of the DR Learner procedure above, now find the best
-linear projection of the CATE given observed covariates $A$ where
-$A \subseteq X$.
+linear projection of the CATE given observed covariates $A$ for unit $i$
+$\hat{\tau}_{BLP} (A_{i})$, where $A \subseteq X$.
+
+*Step 5 (optional): Expected benefit of targeting*
+
+It is often non-trivial to apply a treatment targeting regime, even if
+we have good estimates of the CATE. We can estimate the expected benefit
+of approximately optimal targeting by comparing the the CATE-BLP if we
+apply the treatment to the whole population ($Pr(W) = 1$) compared to a
+world where we only apply a treatment if the BLP is greater than some
+value $\gamma$:
+
+$$
+W_i = 
+\begin{cases}
+& 1, & \text{if}\ \hat{\tau}_{BLP} (A_{i}) > \gamma \\
+& 0, & \text{otherwise}
+\end{cases}.
+$$
+
+We can estimate uncertainty around the total benefit via bootstrapping.
 
 ## Example
 
@@ -187,7 +206,7 @@ ggplot(blp_drl_pred, aes(A, blp_drl)) +
 total_pred <- cate_blp_bootstrap(blp_drl, iterations = 1000)
 #> [ 100 / 1000 ][ 200 / 1000 ][ 300 / 1000 ][ 400 / 1000 ][ 500 / 1000 ][ 600 / 1000 ][ 700 / 1000 ][ 800 / 1000 ][ 900 / 1000 ][ 1000 / 1000 ]
 
-total_pred$difference_blp <- total_pred$predicted_blp_optimal_totals - total_pred$predicted_totals
+total_pred$difference_blp <- total_pred$predicted_optimal - total_pred$predicted_totals
 
 ggplot(total_pred, aes(difference_blp)) +
     geom_density(alpha = 0.7) +
