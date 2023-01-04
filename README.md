@@ -129,7 +129,7 @@ $D^n_2$.
 
 Using the output of the DR Learner procedure above, now find the best
 linear projection of the CATE given observed covariates $A$ for unit $i$
-$\widehat{{\tau}_{BLP}} (A_{i})$, where $A \subseteq X$.
+$(\widehat{\tau_{BLP}} (A_{i})$, where $A \subseteq X$.
 
 *Step 5 (optional): Expected benefit of targeting*
 
