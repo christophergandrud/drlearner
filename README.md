@@ -131,6 +131,10 @@ Using the output of the DR Learner procedure above, now find the best
 linear projection of the CATE given observed covariates $A$ for unit $i$
 $(\widehat{\tau_{BLP}} (A_{i}))$, where $A \subseteq X$.
 
+See
+[here](https://github.com/christophergandrud/blpopt/blob/main/notebooks/promises-pitfalls-cate-blp.ipynb)
+for a discussion of when this strategy can be problematic.
+
 *Step 5 (optional): Expected benefit of targeting*
 
 It is often non-trivial to apply a treatment targeting regime, even if
@@ -138,17 +142,22 @@ we have good estimates of the CATE. We can estimate the expected benefit
 of approximately optimal targeting by comparing the the CATE-BLP if we
 apply the treatment to the whole population $(Pr(W) = 1)$ compared to a
 world where we only apply a treatment if the BLP is greater than some
-value $\gamma$:
+value $\kappa_i$:
 
 $$
 W_i = 
 \begin{cases}
-& 1, & \text{if}\ \hat{\tau}_{BLP} (A_{i}) > \gamma \\
+& 1, & \text{if}\ \hat{\tau}_{BLP} (A_{i}) > \kappa_i \\
 & 0, & \text{otherwise}
 \end{cases}.
 $$
 
+Typically, $\kappa_i \ge 0$ as we usually don’t want to apply a
+treatment with no or negative incremental value. $\kappa_i > 0$ reflects
+a non-zero cost of treatment for unit $i$.
+
 We can estimate uncertainty around the total benefit via bootstrapping.
+See `blpopt::cate_blp_bootstrap` for an implementation.
 
 ## Example
 
@@ -175,7 +184,7 @@ X <- matrix(rnorm(n * p), n, p)
 
 # CATE varies along one dim only.
 tau_ex <- function(x) {
-  1 / (1 + exp(-x))
+  (1 / (1 + exp(-x))) - 0.5
 }
 TAU <- tau_ex(X[, 3])
 
@@ -199,21 +208,3 @@ ggplot(blp_drl_pred, aes(A, blp_drl)) +
 ```
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" />
-
-``` r
-
-# Find total predicted effect using an approximately optimal vs. "treat all" 
-# targeting. Uncertainty estimated with bootstrap
-total_pred <- cate_blp_bootstrap(blp_drl, iterations = 1000, 
-                                 tau.treatment.baseline = 0)
-#> [ 100 / 1000 ][ 200 / 1000 ][ 300 / 1000 ][ 400 / 1000 ][ 500 / 1000 ][ 600 / 1000 ][ 700 / 1000 ][ 800 / 1000 ][ 900 / 1000 ][ 1000 / 1000 ]
-
-total_pred$difference_blp <- total_pred$predicted_optimal - total_pred$predicted_totals
-
-ggplot(total_pred, aes(difference_blp)) +
-    geom_density(alpha = 0.7) +
-    xlab("\nPredicted Incremental Profit") +
-    ggtitle("Bootstraped Predicted Incremental Profit of using\nApproximately Optimal vs 'Treat All' targeting\nfor a population with characteristics A")
-```
-
-<img src="man/figures/README-unnamed-chunk-2-2.png" width="100%" />
