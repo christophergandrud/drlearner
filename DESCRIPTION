@@ -1,7 +1,7 @@
 Package: drlearner
 Type: Package
-Title: Doubly Robust Machine Learner for Heterogeneous Treatment Effect 
-    Estimation
+Title: Doubly Robust Machine Learner with sample splitting for Heterogeneous 
+    Treatment Effect Estimation and Best Linear Projections
 Version: 0.1.0
 Authors@R: c(
     person("Christopher", "Gandrud", email = "christopher.gandrud@gmail.com",

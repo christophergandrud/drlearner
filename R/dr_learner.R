@@ -1,5 +1,6 @@
 #' Estimate heterogeneous treatment effect using Doubly Robust Estimation
-#' (Kennedy 2022) using `cv.glmnet` for estimate construction
+#' (Kennedy 2022) using sample splitting and `cv.glmnet` for estimate
+#' construction
 #'
 #' @param X matrix of covariates
 #' @param Y numeric vector of outcomes

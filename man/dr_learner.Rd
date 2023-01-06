@@ -3,7 +3,8 @@
 \name{dr_learner}
 \alias{dr_learner}
 \title{Estimate heterogeneous treatment effect using Doubly Robust Estimation
-(Kennedy 2022) using \code{cv.glmnet} for estimate construction}
+(Kennedy 2022) using sample splitting and \code{cv.glmnet} for estimate
+construction}
 \usage{
 dr_learner(X, Y, W, family = "gaussian", ...)
 }
@@ -29,7 +30,8 @@ and the localized predictions of the causal forest E[Y_1 - Y_0 | X = x]
 }
 \description{
 Estimate heterogeneous treatment effect using Doubly Robust Estimation
-(Kennedy 2022) using \code{cv.glmnet} for estimate construction
+(Kennedy 2022) using sample splitting and \code{cv.glmnet} for estimate
+construction
 }
 \examples{
 # Simulate data

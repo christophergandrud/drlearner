@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/christophergandrud/dflearner/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/christophergandrud/dflearner/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-Doubly robust machine learner (DR Learner) for Heterogeneous Treatment Effect 
+Doubly robust machine learner (DR Learner) with sample splitting for Heterogeneous Treatment Effect 
 Estimation from [Kennedy (2022)](https://arxiv.org/pdf/2004.14497.pdf) to enable 
 approximately optimal policy targeting using best linear projections. This implementation uses 
 [`cv.glmnet`](https://glmnet.stanford.edu/reference/cv.glmnet.html) for estimate construction. 
@@ -58,7 +58,7 @@ this package or `causal_forest` from the [grf package](https://grf-labs.github.i
 2. Find the best linear projection of the CATE given the characteristics of the 
 individuals we do observe. You can do this using the [blpopt package](https://github.com/christophergandrud/blpopt).
 
-#### Why DR Learner and not Causal Forests?
+#### Why this version of DR Learner with sample splitting and not Causal Forests?
 
 Causal forests are a popular method for estimating CATEs. However, it can be memory intensive and even intractable using common hardware on large data sets (e.g. millions of observations). In [various simulation scenarios](https://github.com/christophergandrud/blpopt/blob/main/notebooks/compare-cate-blp-with-naive-lm.ipynb) DR Learner produces equivalent or better results (lower mean squared error) much faster; orders of magnitude faster and for large data sets (millions of observations) is computationally feasible on a laptop, while causal forest runs out of memory. 
 
@@ -82,9 +82,9 @@ $$
 
 From $\tau(x)$ we would like to then identify optimal treatments for each individual, even when we only observe a subset of covariates $A$ where $A \subseteq X$.
 
-### Doubly Robust Learner (DR Learner)
+### Doubly Robust Learner (DR Learner) with sample splitting
 
-[Kennedy (2022, 10)](https://arxiv.org/pdf/2004.14497.pdf) proposes using sample slitting to estimate the conditional average treatment effects using the following algorithm:
+[Kennedy (2022, 10)](https://arxiv.org/pdf/2004.14497.pdf) proposes using doubly robust learning with sample slitting to estimate the conditional average treatment effects. He proposes the following algorithm:
 
 Let $(D^n_1,D^n_2)$ be two independent samples of $n$ observations of the data mentioned in the set up.
 

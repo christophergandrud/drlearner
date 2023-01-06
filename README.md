@@ -10,8 +10,8 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![R-CMD-check](https://github.com/christophergandrud/dflearner/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/christophergandrud/dflearner/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-Doubly robust machine learner (DR Learner) for Heterogeneous Treatment
-Effect Estimation from [Kennedy
+Doubly robust machine learner (DR Learner) with sample splitting for
+Heterogeneous Treatment Effect Estimation from [Kennedy
 (2022)](https://arxiv.org/pdf/2004.14497.pdf) to enable approximately
 optimal policy targeting using best linear projections. This
 implementation uses
@@ -56,7 +56,7 @@ targeting decisions:
     using the [blpopt
     package](https://github.com/christophergandrud/blpopt).
 
-#### Why DR Learner and not Causal Forests?
+#### Why this version of DR Learner with sample splitting and not Causal Forests?
 
 Causal forests are a popular method for estimating CATEs. However, it
 can be memory intensive and even intractable using common hardware on
@@ -91,11 +91,12 @@ From $\tau(x)$ we would like to then identify optimal treatments for
 each individual, even when we only observe a subset of covariates $A$
 where $A \subseteq X$.
 
-### Doubly Robust Learner (DR Learner)
+### Doubly Robust Learner (DR Learner) with sample splitting
 
 [Kennedy (2022, 10)](https://arxiv.org/pdf/2004.14497.pdf) proposes
-using sample slitting to estimate the conditional average treatment
-effects using the following algorithm:
+using doubly robust learning with sample slitting to estimate the
+conditional average treatment effects. He proposes the following
+algorithm:
 
 Let $(D^n_1,D^n_2)$ be two independent samples of $n$ observations of
 the data mentioned in the set up.
