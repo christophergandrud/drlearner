@@ -59,7 +59,11 @@ dr_learner <- function(X, Y, W, family = "gaussian", ...) {
       n == length(Y) & n == length(W)
   )
   even_split <- floor(n / 3)
-  s <- c(rep(1:3, even_split), 1:(n - even_split * 3))
+  if (n %% 2 != 0) {
+      s <- c(rep(1:3, even_split), 1:(n - even_split * 3))
+  }
+  else
+      s <- c(rep(1:3, even_split))
   s <- sample(s)
 
   # Step 1
